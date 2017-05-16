@@ -1,0 +1,12 @@
+GescomBundle\Entity\supplier:
+    supplier_{1..100}:
+        name: <firstName()>
+        address: <streetAddress()>
+        mail: <email()>
+        postalCode: <numberBetween(10000, 99999)>
+        town: <city()>
+        siret: <fr_FR:siret()>
+        web: <url()>
+        deliveryTime: <numberBetween(1, 30)>
+        score: <numberBetween(1, 5)>
+

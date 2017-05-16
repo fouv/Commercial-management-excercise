@@ -1,0 +1,4 @@
+GescomBundle\Entity\Category:
+    category_{1..10}:
+        name: <word()>
+        description: <sentence()>

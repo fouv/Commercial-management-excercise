@@ -1,0 +1,6 @@
+GescomBundle\Entity\Product:
+    product_{1..500}:
+        name: <word()>
+        description: <sentence()>
+        category: '@category*'
+        #productsupplier: <word()>

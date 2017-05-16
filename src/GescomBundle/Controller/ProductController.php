@@ -54,4 +54,47 @@ class ProductController extends Controller
             'form'      =>  $form->createView(),
         ]);
     }
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @Route("/product/{id}", name="delete_product")
+     */
+
+    public function deleteAction(Request $request, $id)
+    {
+
+    $em = $this->getDoctrine()->getManager();
+    $name = $em->getRepository('GescomBundle:Product')->find($id);
+    $em = remove($name);
+    $em->flush();
+
+    $url = $this->generateUrl('product');
+    return $this->redirect($url);
+    }
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @Route("/product/edit/{id}", name="edit_product")
+     */
+    public function editAction(Request $request, $id)
+    {
+        $name = $this->getDoctrine()->getRepository('GescomBundle:Product')->find($id);
+        $formEdit = $this->CreateForm(ProductType::class,$name);
+        $formEdit->handleRequest($request);
+        if ($formEdit->isValid() && $formEdit->isSubmitted()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($name);
+            $em->flush();
+            $login->getFlashBag()->add('success', 'Your product is modified');
+            $url = $this->generateUrl('product');
+            return $this->redirect($url);
+        }
+        return $this->render('GescomBundle/Product/edit.html.twig', array(
+            'name' => $name,
+            'description' => $description,
+            'category' => $category,
+            'productSupplier'  =>$productSupplier,
+            'formEdit' => $formEdit->createView(),
+        ));
+        }
 }

@@ -31,6 +31,8 @@
                             {% endif %}
                         {% endfor %}
                     </td>
+                    <td><a href="{{ path ('edit_product',{'id': product.id}) }}" class="btn" >Edit</a></td>
+                    <td><a href="{{ path ('delete_product',{'id': product.id}) }}" class="btn" >Delete</a></td>
                 </tr>
                 {% endfor %}
                 </tbody>
